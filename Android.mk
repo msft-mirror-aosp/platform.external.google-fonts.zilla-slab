@@ -19,36 +19,29 @@ LOCAL_PATH := $(call my-dir)
 
 ifneq ($(SMALLER_FONT_FOOTPRINT),true)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := ZillaSlab-Medium.ttf
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_PATH := $(TARGET_OUT)/fonts
-include $(BUILD_PREBUILT)
+# Build the rest of font files as prebuilt.
+# $(1): The source file name in LOCAL_PATH.
+#       It also serves as the module name and the dest file name.
+define build-one-font-module
+$(eval include $(CLEAR_VARS))\
+$(eval LOCAL_MODULE := $(1))\
+$(eval LOCAL_SRC_FILES := $(1))\
+$(eval LOCAL_MODULE_CLASS := ETC)\
+$(eval LOCAL_MODULE_TAGS := optional)\
+$(eval LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/fonts)\
+$(eval LOCAL_PRODUCT_MODULE := true) \
+$(eval include $(BUILD_PREBUILT))
+endef
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := ZillaSlab-MediumItalic.ttf
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_PATH := $(TARGET_OUT)/fonts
-include $(BUILD_PREBUILT)
+font_src_files := \
+    ZillaSlab-Medium.ttf \
+    ZillaSlab-MediumItalic.ttf \
+    ZillaSlab-SemiBold.ttf \
+    ZillaSlab-SemiBoldItalic.ttf
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := ZillaSlab-SemiBold.ttf
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_PATH := $(TARGET_OUT)/fonts
-include $(BUILD_PREBUILT)
+$(foreach f, $(font_src_files), $(call build-one-font-module, $(f)))
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := ZillaSlab-SemiBoldItalic.ttf
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_PATH := $(TARGET_OUT)/fonts
-include $(BUILD_PREBUILT)
+build-one-font-module :=
+font_src_files :=
 
 endif
