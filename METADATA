@@ -1,6 +1,3 @@
-# *** THIS PACKAGE HAS SPECIAL LICENSING CONDITIONS.  PLEASE
-#     CONSULT THE OWNERS AND opensource-licensing@google.com BEFORE
-#     DEPENDING ON IT IN YOUR PROJECT. ***
 name: "zilla-slab"
 description:
     "Zilla Slab is Mozilla's core typeface, used for the Mozilla wordmark, headlines and throughout their designs. "
@@ -17,6 +14,5 @@ third_party {
   }
   version: "ab442e488a2962f4e520a7a384ba1926d3db1994"
   last_upgrade_date { year: 2018 month: 3 day: 11 }
-  license_note: "contains OFL fonts"
-  license_type: BY_EXCEPTION_ONLY
+  license_type: NOTICE
 }
